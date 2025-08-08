@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: #545352;
+    width: 800px;
+    min-width: 800px;
+    height: 440px;
+    margin: 100px auto;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px;
+}
+
+.container .getSongL {
+    float: left;
+    margin: 0 0 5px 5px;
+    cursor: pointer;
+}
+
+.container .getSongR {
+    float: right;
+    margin: 0 0 5px 5px;
+    cursor: pointer;
+}
+
+.container .spinContainerL {
+    float: left;
+    margin-right: 10px;
+}
+
+.container .songTitle {
+    width: 250px;
+    height: 10px;
+    margin: 10px 0 0 0;
+    color: white;
+    font-weight: bold;
+}
+
+.container .spinContainerR {
+    float: right;
+}
+
+.container .progress,.progressR {
+    margin: 15px 5px 0 5px;
+}
+
+.container .timeProgressL,.timeProgressR {
+    display: flex;
+    position: absolute;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.timeProgressL span {
+    margin-top: 15px;
+}
+
+.timeProgressR span {
+    margin-top: 15px;
+}
+
+.container .spinIconL,.spinIconR {
+    display: none;
+    transform-origin: 50% 50%;
+    animation: 2s rotateRight infinite linear;
+}
+
+@keyframes rotateRight {
+    100% {transform:rotate(360deg);}
+}
+
+.container .playButtonsL {
+    float: left;
+    margin: 350px 0 10px 20px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.container .playButtonsR {
+    float: right;
+    margin: 5px 20px 50px 10px;
+    cursor: pointer;
+}
+
+.container .pauseL,.pauseR {
+    display: none;
+    cursor: pointer;
+}
+
+.container .controlButtons {
+    margin-top: 340px;
+    margin-left: 340px;
+    display: flex;
+    cursor: pointer;
+}

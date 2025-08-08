@@ -14,6 +14,31 @@ body {
     box-shadow: 3px 3px 3px;
 }
 
+.listContainerL,.listContainerR {
+    display: none;
+    top: 100px;
+    background-color: #545352;
+    width: 400px;
+    height: 310px;
+    color: white;
+    padding: 5px;
+    margin: 200px auto;
+    overflow: auto;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 7px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 17px;
+}
+
 .container .getSongL {
     float: left;
     margin: 0 0 5px 5px;
@@ -95,4 +120,16 @@ body {
     margin-left: 340px;
     display: flex;
     cursor: pointer;
+}
+
+.container .range {
+    position: absolute;
+    margin: 140px 10px 10px 340px;
+}
+
+input[type="range"] {
+    writing-mode: vertical-lr;
+    -webkit-appearance: slider-vertical;
+    width: 40px;
+    margin: 10px;
 }

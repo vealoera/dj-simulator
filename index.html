@@ -9,18 +9,35 @@
 </head>
 
 <body>
+
+    <div class="listContainerL">
+        <ul>
+            <li id="songs/closer.mp3" onclick="getSongL(this.id)">closer - the chainsmokers</li>
+            <li id="songs/hotlinebling.mp3">hotline bling - drake</li>
+            <li id="songs/unforgettable.mp3">unforgettable - french montana</li>
+        </ul>
+    </div>
+
+    <div class="listContainerR">
+        <ul>
+            <li id="songs/closer.mp3" onclick="getSongR(this.id)">closer - the chainsmokers</li>
+            <li id="songs/hotlinebling.mp3">hotline bling - drake</li>
+            <li id="songs/unforgettable.mp3">unforgettable - french montana</li>
+        </ul>
+    </div>
+
     <div class="container">
         <div class="getSongL">
-            <img class="musicLeft" src="images/music.png" alt="pick a song" width="50" height="50">
+            <img class="musicLeft" src="images/music.png" alt="pick a song" width="50" height="50" onclick="pickMusicL()">
         </div>
         <div class="getSongR">
-            <img class="musicRight" src="images/music.png" alt="pick a song" width="50" height="50">
+            <img class="musicRight" src="images/music.png" alt="pick a song" width="50" height="50" onclick="pickMusicR()">
         </div>
 
         <div class="spinContainerL">
             <div class="songTitle">
                 <audio id="audioPlayerL"></audio>
-                <marquee direction="on the side">Hello</marquee>
+                <marquee direction="on the side"><span id="title"></span></marquee>
             </div>
             <div class="timeProgressL">
             <span class="currentTime">0:00</span>
@@ -34,7 +51,7 @@
         <div class="spinContainerR">
             <div class="songTitle">
                 <audio id="audioPlayerR"></audio>
-                <marquee direction="on the side">Hello</marquee>
+                <marquee direction="on the side"><span id="titleR"></span></marquee>
             </div>
             <div class="timeProgressR">
             <span class="currentTime">0:00</span>
@@ -46,18 +63,20 @@
         </div>
 
         <div class="playButtonsL">
-            <img class="playL" src="images/play.png" alt="play" width="100" height="100">
-            <img class="pauseL" src="images/pause.png" alt="pause" width="100" height="100">
+            <img class="playL" src="images/play.png" alt="play" width="100" height="100" onclick="playL()">
+            <img class="pauseL" src="images/pause.png" alt="pause" width="100" height="100" onclick="pauseL()">
         </div>
 
         <div class="playButtonsR">
-            <img class="playR" src="images/play.png" alt="play" width="100" height="100">
-            <img class="pauseR" src="images/pause.png" alt="pause" width="100" height="100">
+            <img class="playR" src="images/play.png" alt="play" width="100" height="100" onclick="playR()">
+            <img class="pauseR" src="images/pause.png" alt="pause" width="100" height="100" onclick="pauseR()">
         </div>
 
         <div class="range">
-            
+            <input class="rangeL" type="range">
+            <input class="rangeR" type="range">
         </div>
+
         <div class="controlButtons">
             <img src="images/left.png" alt="left" height="100">
             <img src="images/right.png" alt="right" height="100">
@@ -65,4 +84,6 @@
     </div>
 </body>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="script.js"></script>
 </html>

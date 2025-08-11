@@ -6,23 +6,36 @@
     <title>dj simulator</title>
       <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
+    <div class="menu__bar">
+        <h1 class="logo">dj <span>simulator</span></h1>
+        <ul>
+            <li><a href="index.html">play!</a></li>
+            <li><a href="">request!</a></li>
+            <li><a href="">about me!</a></li>
+        </ul>
+    </div>
+
+    <h1>dj simulator</h1>
+    <p>select your tracks, mess around with the volumes and crossfader to make a mashup!</p>
+
     <div class="listContainerL">
         <ul>
             <li id="songs/closer.mp3" onclick="getSongL(this.id)">closer - the chainsmokers</li>
-            <li id="songs/hotlinebling.mp3">hotline bling - drake</li>
-            <li id="songs/unforgettable.mp3">unforgettable - french montana</li>
+            <li id="songs/hotlinebling.mp3" onclick="getSongL(this.id)">hotline bling - drake</li>
+            <li id="songs/unforgettable.mp3" onclick="getSongL(this.id)">unforgettable - french montana</li>
         </ul>
     </div>
 
     <div class="listContainerR">
         <ul>
             <li id="songs/closer.mp3" onclick="getSongR(this.id)">closer - the chainsmokers</li>
-            <li id="songs/hotlinebling.mp3">hotline bling - drake</li>
-            <li id="songs/unforgettable.mp3">unforgettable - french montana</li>
+            <li id="songs/hotlinebling.mp3" onclick="getSongR(this.id)">hotline bling - drake</li>
+            <li id="songs/unforgettable.mp3" onclick="getSongR(this.id)">unforgettable - french montana</li>
         </ul>
     </div>
 
@@ -44,8 +57,9 @@
             <progress class="progress" value="0"></progress>
             <span class="timeL">0:00</span><br>
             </div>
-            <img class="iconLeftShow" src="images/vinyl.png" alt="rotate" width="280" height="280">
-            <img class="spinIconL" src="images/vinyl.png" alt="rotate" width="280" height="280">
+            <br><br>
+            <img class="iconLeftShow" src="images/jogwheel.png" alt="rotate" width="280" height="280">
+            <img class="spinIconL" src="images/jogwheel.png" alt="rotate" width="280" height="280">
         </div>
     
         <div class="spinContainerR">
@@ -54,12 +68,13 @@
                 <marquee direction="on the side"><span id="titleR"></span></marquee>
             </div>
             <div class="timeProgressR">
-            <span class="currentTime">0:00</span>
+            <span class="currentTimeR">0:00</span>
              <progress class="progressR" value="0"></progress>
             <span class="timeR">0:00</span><br>
             </div>
-            <img class="iconRightShow" src="images/vinyl.png" alt="rotate" width="280" height="280">
-            <img class="spinIconR" src="images/vinyl.png" alt="rotate" width="280" height="280">
+            <br><br>
+            <img class="iconRightShow" src="images/jogwheel.png" alt="rotate" width="280" height="280">
+            <img class="spinIconR" src="images/jogwheel.png" alt="rotate" width="280" height="280">
         </div>
 
         <div class="playButtonsL">
@@ -78,8 +93,8 @@
         </div>
 
         <div class="controlButtons">
-            <img src="images/left.png" alt="left" height="100">
-            <img src="images/right.png" alt="right" height="100">
+            <img src="images/left.png" alt="left" height="100" onclick="pauseSpinL()">
+            <img src="images/right.png" alt="right" height="100" onclick="pauseSpinR()">
         </div>
     </div>
 </body>

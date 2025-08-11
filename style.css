@@ -3,8 +3,48 @@ body {
     padding: 0;
 }
 
+.menu__bar {
+    background-color: aquamarine;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    color: pink;
+    font-size: 30px;
+}
+
+.logo span {
+    color: green;
+}
+
+.menu__bar ul {
+    list-style: none;
+    display: flex;
+}
+
+.menu__bar ul li {
+    padding: 10px 30px;
+}
+
+.menu__bar ul li a {
+    color: blueviolet;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s;
+}  
+
+.menu__bar ul li a:hover {
+    color: red;
+}  
+
 .container {
-    background-color: #545352;
+    background-color: #2e2e2e;
     width: 800px;
     min-width: 800px;
     height: 440px;
@@ -17,7 +57,7 @@ body {
 .listContainerL,.listContainerR {
     display: none;
     top: 100px;
-    background-color: #545352;
+    background-color: #2e2e2e;
     width: 400px;
     height: 310px;
     color: white;
@@ -54,6 +94,7 @@ li {
 .container .spinContainerL {
     float: left;
     margin-right: 10px;
+    margin-top: -7px;
 }
 
 .container .songTitle {
@@ -66,6 +107,7 @@ li {
 
 .container .spinContainerR {
     float: right;
+    margin-top: -7px;
 }
 
 .container .progress,.progressR {
@@ -117,7 +159,7 @@ li {
 
 .container .controlButtons {
     margin-top: 340px;
-    margin-left: 340px;
+    margin-left: 305px;
     display: flex;
     cursor: pointer;
 }
@@ -127,9 +169,8 @@ li {
     margin: 140px 10px 10px 340px;
 }
 
-input[type="range"] {
+input[type="range"]{
     writing-mode: vertical-lr;
-    -webkit-appearance: slider-vertical;
     width: 40px;
     margin: 10px;
 }

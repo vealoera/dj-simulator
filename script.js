@@ -4,12 +4,22 @@ var volumeL = document.querySelector(".rangeL");
 var volumeR = document.querySelector(".rangeR");
 var progressBarL = document.querySelector(".progress");
 var progressBarR = document.querySelector(".progressR");
+var crossfader = document.getElementById("crossfader");
+var bpmData = {
+    "songs/closer.mp3": 95,
+    "songs/hotlinebling.mp3": 135,
+    "songs/unforgettable.mp3": 98,
+};
+var bpmIntervals = {L: null, R: null};
 
 function getSongL(songIdL) {
     document.getElementById("title").innerHTML = songIdL;
     $("#audioPlayerL").attr("src", songIdL)
     $(".listContainerL").hide();
     $(".container").show();
+
+    let bpm = bpmData[songIdL];
+    startBeatStrip('L', bpm);
 }
 
 function getSongR(songIdR) {
@@ -17,6 +27,9 @@ function getSongR(songIdR) {
     $("#audioPlayerR").attr("src", songIdR)
     $(".listContainerR").hide();
     $(".container").show();
+
+    let bpm = bpmData[songIdR];
+    startBeatStrip('R', bpm);
 }
 
 function playL() {
@@ -54,23 +67,13 @@ function pickMusicR() {
     $(".container").hide();
 }
 
-volumeL.addEventListener('change', function(e) {
+volumeL.addEventListener('input', function(e) {
     playSongL.volume = e.currentTarget.value / 100;
 });
 
-volumeR.addEventListener('change', function(e) {
+volumeR.addEventListener('input', function(e) {
     playSongR.volume = e.currentTarget.value / 100;
 });
-
-function pauseSpinL(){
-    playSongL.volume = 1;
-    playSongR.volume = 0;
-}
-
-function pauseSpinR(){
-    playSongR.volume = 1;
-    playSongL.volume = 0;
-}
 
 function formatTime(seconds) {
     var time = Math.round(seconds);
@@ -112,4 +115,27 @@ playSongR.addEventListener("timeupdate", function() {
 
 function currentTimeProgR(playSongR){
     $(".currentTimeR").text(formatTime(playSongR.currentTime));
+}
+
+crossfader.addEventListener("input", function(e) {
+    var value = e.target.value / 100;
+    playSongL.volume = 1 - value;
+    playSongR.volume = value;
+})
+
+function startBeatStrip(side, bpm) {
+    var strip = document.getElementById(side === 'L' ? 'beatStripL' : 'beatStripR');
+    strip.innerHTML = '';
+    if (!bpm) return;
+    var beatTime = 60 / bpm * 1000;
+    clearInterval(bpmIntervals[side]);
+    bpmIntervals[side] = setInterval(() => {
+        var marker = document.createElement('div');
+        marker.classList.add('beatMarker');
+        marker.style.animationDuration = (200/100) * beatTime + "ms";
+        strip.appendChild(marker);
+        setTimeout (() => {
+            marker.remove();
+        }, (beatTime * 4));
+    }, beatTime);
 }

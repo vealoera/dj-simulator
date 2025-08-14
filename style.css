@@ -157,11 +157,13 @@ li {
     cursor: pointer;
 }
 
-.container .controlButtons {
-    margin-top: 340px;
-    margin-left: 305px;
-    display: flex;
-    cursor: pointer;
+.container .crossfaderContainer {
+    position: absolute;
+
+    bottom: -150px;
+    left: 66.5%;
+    transform: rotate(90deg);
+    justify-content: center;
 }
 
 .container .range {
@@ -173,4 +175,41 @@ input[type="range"]{
     writing-mode: vertical-lr;
     width: 40px;
     margin: 10px;
+    transform: rotate(180deg);
+}
+
+.container .beatstripContainer {
+    position: relative;
+    height: 20px;
+    width:  200px;
+    background: black;
+    overflow: hidden;
+    border: 1px solid white;
+}
+
+.container .beatstrip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.container .beatMarker {
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    opacity: 0.8;
+    animation: moveLeft linear;
+}
+
+.container .beatstrip#beatstripL .beatMarker {
+    background: cyan;
+}
+
+@keyframes moveLeft {
+    from {left: 200px;}
+    to {left: -4px;}
 }

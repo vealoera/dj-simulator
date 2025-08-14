@@ -12,6 +12,7 @@
 <body>
 
     <div class="menu__bar">
+        <img src="images/djing.png" width="50">
         <h1 class="logo">dj <span>simulator</span></h1>
         <ul>
             <li><a href="index.html">play!</a></li>
@@ -92,9 +93,13 @@
             <input class="rangeR" type="range">
         </div>
 
-        <div class="controlButtons">
-            <img src="images/left.png" alt="left" height="100" onclick="pauseSpinL()">
-            <img src="images/right.png" alt="right" height="100" onclick="pauseSpinR()">
+        <div class="crossfaderContainer">
+            <input id="crossfader" type="range" min="0" max="100" value="50">
+        </div>
+
+        <div class="beatstripContainer">
+            <div id="beatstripL" class="beatstrip"></div>
+            <div id="beatstripR" class="beatstrip"></div>
         </div>
     </div>
 </body>

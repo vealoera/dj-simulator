@@ -9,51 +9,59 @@ var bpmData = {
     "songs/closer.mp3": 95,
     "songs/hotlinebling.mp3": 135,
     "songs/unforgettable.mp3": 98,
+    "songs/delicate.mp3": 95,
 };
-var bpmIntervals = {L: null, R: null};
+var bpmIntervals = {};
+
+let currentSongL = null;
+let currentSongR = null;
 
 function getSongL(songIdL) {
+    currentSongL = songIdL;
     document.getElementById("title").innerHTML = songIdL;
     $("#audioPlayerL").attr("src", songIdL)
     $(".listContainerL").hide();
     $(".container").show();
-
-    let bpm = bpmData[songIdL];
-    startBeatStrip('L', bpm);
 }
 
 function getSongR(songIdR) {
+    currentSongR = songIdR;
     document.getElementById("titleR").innerHTML = songIdR;
     $("#audioPlayerR").attr("src", songIdR)
     $(".listContainerR").hide();
     $(".container").show();
-
-    let bpm = bpmData[songIdR];
-    startBeatStrip('R', bpm);
 }
 
 function playL() {
     playSongL.play();
     $(".playL,.iconLeftShow").hide();
     $(".pauseL,.spinIconL").show();
+
+    let bpm = bpmData[currentSongL];
+    startBeatStrip('L', bpm);
 }
 
 function playR() {
     playSongR.play();
     $(".playR,.iconRightShow").hide();
     $(".pauseR,.spinIconR").show();
+
+    let bpm = bpmData[currentSongR];
+    startBeatStrip('R', bpm);
 }
 
 function pauseL() {
     playSongL.pause();
     $(".pauseL,.spinIconL").hide();
     $(".playL,.iconLeftShow").show();
+    clearInterval(bpmIntervals['L']);
 }
 
 function pauseR() {
     playSongR.pause();
     $(".pauseR,.spinIconR").hide();
     $(".playR,.iconRightShow").show();
+    clearInterval(bpmIntervals['R']);
 }
 
 
@@ -124,18 +132,68 @@ crossfader.addEventListener("input", function(e) {
 })
 
 function startBeatStrip(side, bpm) {
-    var strip = document.getElementById(side === 'L' ? 'beatStripL' : 'beatStripR');
+    var strip = document.getElementById(side === 'L' ? 'beatstripL' : 'beatstripR');
     strip.innerHTML = '';
     if (!bpm) return;
-    var beatTime = 60 / bpm * 1000;
+
+    let audioEl = side === 'L' ? playSongL : playSongR;
+    let beatTime = 60 / bpm;
     clearInterval(bpmIntervals[side]);
-    bpmIntervals[side] = setInterval(() => {
-        var marker = document.createElement('div');
+
+    let songTime = audioEl.currentTime;
+    let offset = (songTime % beatTime) * 1000;
+
+    function createMarker() {
+        let marker = document.createElement('div');
         marker.classList.add('beatMarker');
-        marker.style.animationDuration = (200/100) * beatTime + "ms";
+        marker.style.animationDuration = beatTime * 1000 + "ms";
         strip.appendChild(marker);
-        setTimeout (() => {
-            marker.remove();
-        }, (beatTime * 4));
-    }, beatTime);
+        setTimeout(() => marker.remove(), beatTime * 2000);
+    }
+
+    setTimeout(() => {
+        createMarker();
+        bpmIntervals[side] = setInterval(createMarker, beatTime * 1000);
+    }, beatTime * 1000 - offset);
 }
+
+const JOG_SENSITIVITY = 0.05;  
+
+let lastX = null;
+
+function enableJogwheel(audioEl, jogwheelEl) {
+    jogwheelEl.addEventListener("mousedown", startDrag);
+    jogwheelEl.addEventListener("touchstart", startDrag);
+
+    function startDrag(e) {
+        e.preventDefault();
+        lastX = e.clientX || e.touches[0].clientX;
+        document.addEventListener("mousemove", onDrag);
+        document.addEventListener("mouseup", stopDrag);
+        document.addEventListener("touchmove", onDrag);
+        document.addEventListener("touchend", stopDrag);
+    }
+
+    function onDrag(e) {
+        let x = e.clientX || e.touches[0].clientX;
+        let delta = x - lastX;
+        lastX = x;
+
+        audioEl.currentTime = Math.max(0, Math.min(audioEl.duration, audioEl.currentTime + delta * JOG_SENSITIVITY));
+
+        jogwheelEl.style.transform = `rotate(${audioEl.currentTime * 20}deg)`; 
+
+        let bpm = bpmData[side === 'L' ? currentSongL : currentSongR];
+        startBeatStrip(side, bpm);
+    }
+
+    function stopDrag() {
+        document.removeEventListener("mousemove", onDrag);
+        document.removeEventListener("mouseup", stopDrag);
+        document.removeEventListener("touchmove", onDrag);
+        document.removeEventListener("touchend", stopDrag);
+    }
+}
+
+enableJogwheel(playSongL, document.querySelector(".spinIconL"), 'L');
+enableJogwheel(playSongR, document.querySelector(".spinIconR"), 'R');

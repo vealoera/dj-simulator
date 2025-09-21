@@ -159,9 +159,8 @@ li {
 
 .container .crossfaderContainer {
     position: absolute;
-
     bottom: -150px;
-    left: 66.5%;
+    left: 47.5%;
     transform: rotate(90deg);
     justify-content: center;
 }
@@ -180,20 +179,26 @@ input[type="range"]{
 
 .container .beatstripContainer {
     position: relative;
-    height: 20px;
+    height: 60px;
     width:  200px;
-    background: black;
-    overflow: hidden;
-    border: 1px solid white;
+    margin: 20px auto;
 }
 
 .container .beatstrip {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    height: 20px;
     width: 100%;
     pointer-events: none;
+}
+
+.container .beatstrip#beatstripL {
+    top: 0;
+    background: black;
+}
+
+.container .beatstrip#beatstripR {
+    top: 30px;
+    background: black;
 }
 
 .container .beatMarker {
@@ -206,6 +211,10 @@ input[type="range"]{
 }
 
 .container .beatstrip#beatstripL .beatMarker {
+    background: red;
+}
+
+.container .beatstrip#beatstripR .beatMarker {
     background: cyan;
 }
 
